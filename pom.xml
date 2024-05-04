@@ -27,6 +27,24 @@
 		</license>
 	</licenses>
 	<developers>
+	<developer>
+			<name>Luisa Parra</name>
+			<email>parran_ll@javeriana.edu.co</email>
+			<organization>Pontificia Universidad Javeriana</organization>
+			<organizationUrl>https://www.javeriana.edu.co</organizationUrl>
+		</developer>
+		<developer>
+			<name>Fabio Buitrago</name>
+			<email>fabio_buitrago@javeriana.edu.co</email>
+			<organization>Pontificia Universidad Javeriana</organization>
+			<organizationUrl>https://www.javeriana.edu.co</organizationUrl>
+		</developer>
+		<developer>
+			<name>Erick Garavito</name>
+			<email>erick.garavitov@javeriana.edu.co</email>
+			<organization>Pontificia Universidad Javeriana</organization>
+			<organizationUrl>https://www.javeriana.edu.co</organizationUrl>
+		</developer>
 		<developer>
 			<name>Andres Sanchez</name>
 			<email>asanchez-m@javeriana.edu.co</email>
