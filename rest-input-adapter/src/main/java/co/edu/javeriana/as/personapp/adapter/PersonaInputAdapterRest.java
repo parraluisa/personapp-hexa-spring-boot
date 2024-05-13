@@ -12,8 +12,8 @@ import co.edu.javeriana.as.personapp.application.port.out.PersonOutputPort;
 import co.edu.javeriana.as.personapp.application.usecase.PersonUseCase;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
 import co.edu.javeriana.as.personapp.common.exceptions.InvalidOptionException;
+import co.edu.javeriana.as.personapp.common.exceptions.NoExistException;
 import co.edu.javeriana.as.personapp.common.setup.DatabaseOption;
-import co.edu.javeriana.as.personapp.domain.Gender;
 import co.edu.javeriana.as.personapp.domain.Person;
 import co.edu.javeriana.as.personapp.mapper.PersonaMapperRest;
 import co.edu.javeriana.as.personapp.model.request.PersonaRequest;
@@ -49,6 +49,7 @@ public class PersonaInputAdapterRest {
 		}
 	}
 
+	// View All
 	public List<PersonaResponse> historial(String database) {
 		log.info("Into historial PersonaEntity in Input Adapter");
 		try {
@@ -66,6 +67,7 @@ public class PersonaInputAdapterRest {
 		}
 	}
 
+	// Create
 	public PersonaResponse crearPersona(PersonaRequest request) {
 		try {
 			setPersonOutputPortInjection(request.getDatabase());
@@ -73,9 +75,62 @@ public class PersonaInputAdapterRest {
 			return personaMapperRest.fromDomainToAdapterRestMaria(person);
 		} catch (InvalidOptionException e) {
 			log.warn(e.getMessage());
-			//return new PersonaResponse("", "", "", "", "", "", "");
+			return new PersonaResponse("", "", "", "", "", "", "");
 		}
-		return null;
 	}
 
+	// Update
+	public PersonaResponse actualizarPersona(PersonaRequest request){
+		try {
+			setPersonOutputPortInjection(request.getDatabase());
+			Person person = personInputPort.edit(Integer.parseInt(request.getDni()),personaMapperRest.fromAdapterToDomain(request));
+			return personaMapperRest.fromDomainToAdapterRestMaria(person);
+		} catch (InvalidOptionException e) {
+			log.warn(e.getMessage());
+			return new PersonaResponse("", "", "", "", "", "", "");
+		} catch (NumberFormatException e) {
+			log.warn(e.getMessage());
+			return new PersonaResponse("", "", "", "", "", "", "");
+		} catch (NoExistException e) {
+			log.warn(e.getMessage());
+			return new PersonaResponse("", "", "", "", "", "", "");
+		}
+	}
+
+	// Delete
+	public PersonaResponse eliminarPersona(String database, String identification){
+		try{
+			setPersonOutputPortInjection(database);
+			return new PersonaResponse(personInputPort.drop(Integer.parseInt(identification)).toString(), "DELETED", "DELETED", "DELETED", "DELETED", database, "DELETED");
+		} catch (InvalidOptionException e) {
+			log.warn(e.getMessage());
+			return new PersonaResponse("", "", "", "", "", "", "");
+		} catch (NumberFormatException e) {
+			log.warn(e.getMessage());
+			return new PersonaResponse("", "", "", "", "", "", "");
+		} catch (NoExistException e) {
+			log.warn(e.getMessage());
+			return new PersonaResponse("", "", "", "", "", "", "");
+		}
+	}
+	
+	// Find One
+	public PersonaResponse encontrarPersonaPorId(String database, String identification)
+	{
+		try{
+			setPersonOutputPortInjection(database);
+			Person person = personInputPort.findOne(Integer.parseInt(identification));
+			return personaMapperRest.fromDomainToAdapterRestMaria(person);
+		}
+		catch(Exception e){
+			log.warn(e.getMessage());
+			return new PersonaResponse("", "", "", "", "", "", "");
+		}
+	}
+
+	// Count
+
+	// Get Phones
+
+	// Get Studies
 }

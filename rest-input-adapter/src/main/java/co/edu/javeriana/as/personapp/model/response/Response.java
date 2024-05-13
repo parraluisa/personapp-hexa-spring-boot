@@ -43,6 +43,4 @@ public class Response {
 		this.date = date;
 	}
 	
-	
-
 }

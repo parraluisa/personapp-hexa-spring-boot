@@ -1,6 +1,7 @@
 package co.edu.javeriana.as.personapp.mapper;
 
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
+import co.edu.javeriana.as.personapp.domain.Gender;
 import co.edu.javeriana.as.personapp.domain.Person;
 import co.edu.javeriana.as.personapp.model.request.PersonaRequest;
 import co.edu.javeriana.as.personapp.model.response.PersonaResponse;
@@ -27,8 +28,32 @@ public class PersonaMapperRest {
 	}
 
 	public Person fromAdapterToDomain(PersonaRequest request) {
-		// TODO Auto-generated method stub
-		return new Person();
+
+		Person person = new Person();
+
+		person.setIdentification(Integer.parseInt(request.getDni()));
+
+		person.setFirstName(request.getFirstName());
+
+		person.setLastName(request.getLastName());
+
+		person.setAge(request.getAge() != null ? Integer.parseInt(request.getAge()) : null);
+
+		person.setGender(parseGender(request.getGender()));
+
+		return person;
 	}
+	
+	private Gender parseGender(String gender) {
+		switch (gender) {
+			case "M":
+				return Gender.MALE;
+			case "F":
+				return Gender.FEMALE;
+			default:
+				return Gender.OTHER;
+		}
+	}
+	
 		
 }

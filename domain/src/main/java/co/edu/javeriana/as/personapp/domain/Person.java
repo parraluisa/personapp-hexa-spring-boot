@@ -14,17 +14,24 @@ import lombok.ToString;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class Person {
+
 	@NonNull
 	private Integer identification;
+
 	@NonNull
 	private String firstName;
+
 	@NonNull
 	private String lastName;
+
 	@NonNull
 	private Gender gender;
+
 	private Integer age;
+
 	@ToString.Exclude
 	private List<Phone> phoneNumbers;
+
 	@ToString.Exclude
 	private List<Study> studies;
 
