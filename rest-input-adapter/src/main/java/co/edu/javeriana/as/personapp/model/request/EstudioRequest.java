@@ -12,12 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EstudioRequest {
-
-    private String id_pro;
-    private String id_cc;
-    private String univer;
+    private String idProfession;
+    private String idPerson;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate date;
+    private LocalDate graduationDate;
+    private String universityName;
     private String database;
-    
 }
