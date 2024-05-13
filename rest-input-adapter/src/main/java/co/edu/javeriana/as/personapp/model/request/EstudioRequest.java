@@ -15,7 +15,8 @@ public class EstudioRequest {
 
     private String idProfession;
     private String idPerson;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate graduationDate;
     private String universityName;
     private String database;

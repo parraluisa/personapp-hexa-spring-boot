@@ -1,4 +1,4 @@
-package co.edu.javeriana.as.personapp.adapter;
+package co.edu.javeriana.as.personapp.terminal.adapter;
 
 import co.edu.javeriana.as.personapp.application.port.in.PersonInputPort;
 import co.edu.javeriana.as.personapp.application.port.in.ProfessionInputPort;
@@ -14,22 +14,17 @@ import co.edu.javeriana.as.personapp.common.exceptions.InvalidOptionException;
 import co.edu.javeriana.as.personapp.common.setup.DatabaseOption;
 import co.edu.javeriana.as.personapp.domain.Person;
 import co.edu.javeriana.as.personapp.domain.Profession;
-import co.edu.javeriana.as.personapp.domain.Study;
-import co.edu.javeriana.as.personapp.mapper.EstudioMapperRest;
-import co.edu.javeriana.as.personapp.model.request.EstudioRequest;
-import co.edu.javeriana.as.personapp.model.response.EstudioResponse;
+import co.edu.javeriana.as.personapp.terminal.mapper.EstudiosMapperCli;
+import co.edu.javeriana.as.personapp.terminal.model.EstudiosModelCli;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Slf4j
 @Adapter
-public class EstudioInputAdapterRest {
+public class EstudiosInputAdapterCli {
 
-    //MariaDB Adapters
+    //MariaDB
     @Autowired
     @Qualifier("studyOutputAdapterMaria")
     private StudyOutputPort studyOutputPortMaria;
@@ -42,7 +37,7 @@ public class EstudioInputAdapterRest {
     @Qualifier("professionOutputAdapterMaria")
     private ProfessionOutputPort professionOutputPortMaria;
 
-    //MongoDB Adapters
+    //MongoDB
     @Autowired
     @Qualifier("studyOutputAdapterMongo")
     private StudyOutputPort studyOutputPortMongo;
@@ -56,70 +51,51 @@ public class EstudioInputAdapterRest {
     private ProfessionOutputPort professionOutputPortMongo;
 
     @Autowired
-    private EstudioMapperRest estudioMapperRest;
+    private EstudiosMapperCli EstudiosMapperCli;
 
-    //Use Cases
+    //Puertos de entrada a la aplicación
     StudyInputPort studyInputPort;
-    PersonInputPort personInputPort;
     ProfessionInputPort professionInputPort;
+    PersonInputPort personInputPort;
 
-    private String setStudyOutputPortInjection(String dbOption) throws InvalidOptionException {
+    public void setStudyOutputPortInjection(String dbOption) throws InvalidOptionException {
         if (dbOption.equalsIgnoreCase(DatabaseOption.MARIA.toString())) {
 
             studyInputPort = new StudyUseCase(studyOutputPortMaria);
-            personInputPort = new PersonUseCase(personOutputPortMaria);
             professionInputPort = new ProfessionUseCase(professionOutputPortMaria);
+            personInputPort = new PersonUseCase(personOutputPortMaria);
 
-            return DatabaseOption.MARIA.toString();
         } else if (dbOption.equalsIgnoreCase(DatabaseOption.MONGO.toString())) {
 
             studyInputPort = new StudyUseCase(studyOutputPortMongo);
-            personInputPort = new PersonUseCase(personOutputPortMongo);
             professionInputPort = new ProfessionUseCase(professionOutputPortMongo);
+            personInputPort = new PersonUseCase(personOutputPortMongo);
 
-            return  DatabaseOption.MONGO.toString();
         } else {
             throw new InvalidOptionException("Invalid database option: " + dbOption);
         }
     }
 
-    public List<EstudioResponse> historial(String database){
-        log.info("Into historial EstudioEntity in Input Adapter");
-
-        try{
-            String db = setStudyOutputPortInjection(database);
-            if(db.equalsIgnoreCase(DatabaseOption.MARIA.toString())){
-                return studyInputPort.findAll().stream().map(estudioMapperRest::fromDomainToAdapterRestMaria)
-                        .collect(Collectors.toList());
-        }
-            else {
-                return studyInputPort.findAll().stream().map(estudioMapperRest::fromDomainToAdapterRestMongo)
-                        .collect(Collectors.toList());
-            }
-    }catch (InvalidOptionException e){
-            log.error("Error: " + e.getMessage());
-            return null;
-        }
+    public void historial(){
+        log.info("Into historial StudyEntity in Input Adapter");
+        studyInputPort.findAll().stream()
+            .map(EstudiosMapperCli::fromDomainToAdapterCli)
+            .forEach(System.out::println);
     }
 
-    public EstudioResponse crearEstudio(EstudioRequest request)
-    {
+    public void crearEstudios(EstudiosModelCli Estudios, String dbOption){
+        log.info("Into crearEstudios StudyEntity in Input Adapter");
         try{
-            setStudyOutputPortInjection(request.getDatabase());
+            setStudyOutputPortInjection(dbOption);
             //Get person by id
-            Person person = personInputPort.findOne(Integer.parseInt(request.getIdPerson()));
+            Person person = personInputPort.findOne(Integer.parseInt(Estudios.getIdPerson()));
             //Get profession by id
-            Profession profession = professionInputPort.findOne(Integer.parseInt(request.getIdProfession()));
-
-            //Create study
-            Study study = studyInputPort.create(estudioMapperRest.fromAdapterToDomain(request, profession, person));
-            System.out.println(study);
-            return estudioMapperRest.fromDomainToAdapterRestMaria(study);
+            Profession profession = professionInputPort.findOne(Integer.parseInt(Estudios.getIdProfession()));
+            studyInputPort.create(EstudiosMapperCli.fromAdapterCliToDomain(Estudios, profession, person));
+            System.out.println("Estudios creado correctamente "+Estudios.toString());
         }catch (Exception e){
-            log.warn("Error: " + e.getMessage());
-            return null;
+            log.warn(e.getMessage());
+            System.out.println("Error al crear el Estudios");
         }
     }
-
-
 }
