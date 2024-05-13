@@ -64,7 +64,8 @@ public class TelefonoInputAdapterRest {
             throw new InvalidOptionException("Invalid database option: " + dbOption);
         }
     }
-    
+
+    // View All
     public List<TelefonoResponse> historial(String database)
     {
         log.info("Into historial TelefonoEntity in Input Adapter");
@@ -84,6 +85,7 @@ public class TelefonoInputAdapterRest {
         }
     }
 
+    // Create
     public TelefonoResponse crearTelefono(TelefonoRequest request)
     {
         try {
@@ -98,7 +100,8 @@ public class TelefonoInputAdapterRest {
         return null;
     }
 
-    public TelefonoResponse editarTelefono(TelefonoRequest request)
+    // Update
+    public TelefonoResponse actualizarTelefono(TelefonoRequest request)
     {
         try{
             setPhoneOutportInjection(request.getDatabase());
@@ -113,6 +116,7 @@ public class TelefonoInputAdapterRest {
         }
     }
 
+    // Delete
     public TelefonoResponse eliminarTelefono(String database, String number)
     {
         try{
@@ -127,6 +131,7 @@ public class TelefonoInputAdapterRest {
         }
     }
 
+    // Find One
     public TelefonoResponse buscarTelefono(String database, String number)
     {
         try{

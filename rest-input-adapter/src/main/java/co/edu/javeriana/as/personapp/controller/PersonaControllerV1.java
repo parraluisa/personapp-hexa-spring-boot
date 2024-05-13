@@ -108,11 +108,7 @@ public class PersonaControllerV1 {
 		return personaInputAdapterRest.eliminarPersona(database, identification);
 	}
 
-	@Operation(summary = "Buscar persona por ID")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Persona encontrada exitosamente"),
-			@ApiResponse(responseCode = "404", description = "Persona no encontrada")
-	})
+	
 
 	/**
 	 * Método para encontrar una persona por su identificación.
@@ -121,6 +117,11 @@ public class PersonaControllerV1 {
 	 * @param identification La identificación de la persona a eliminar.
 	 * @return La persona encontrada.
 	 */
+	@Operation(summary = "Buscar persona por ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Persona encontrada exitosamente"),
+			@ApiResponse(responseCode = "404", description = "Persona no encontrada")
+	})
 	@ResponseBody
 	@GetMapping(path = "/{database}/{identification}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public PersonaResponse findPersonById(
