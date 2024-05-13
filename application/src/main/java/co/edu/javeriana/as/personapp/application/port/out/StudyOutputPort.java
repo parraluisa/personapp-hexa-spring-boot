@@ -9,8 +9,8 @@ import co.edu.javeriana.as.personapp.domain.Study;
 public interface StudyOutputPort {
 
     public Study save(Study study);
-    public Boolean delete(Integer identification);
+    public Boolean delete(Integer professionID, Integer personID);
     public List<Study> find();
-    public Study findById(Integer identification);
+    public Study findById(Integer proffesionID, Integer personID);
 
 }
