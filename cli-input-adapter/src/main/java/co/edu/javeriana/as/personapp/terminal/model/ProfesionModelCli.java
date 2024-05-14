@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProfesionModelCli {
+
     private Integer id;
     private String name;
     private String description;
+    
 }

@@ -10,8 +10,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EstudiosModelCli {
+
     private LocalDate graduationDate;
     private String universityName;
     private String idPerson;
     private String idProfession;
+    
 }
