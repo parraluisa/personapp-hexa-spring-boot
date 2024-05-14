@@ -19,15 +19,6 @@ Este proyecto es un sistema de gestión de personas que te permite administrar i
 1. Ejecutar los scripts en las bases de datos
 2. Configurar Lombok en sus IDEs
 
-## Ejecución
-
-- El adaptador REST corre en el puerto 3000
-- Swagger disponible en [http://localhost:3000/swagger-ui.html](http://localhost:3000/swagger-ui.html)
-
-## Advertencia
-
-Por favor, no editar este repositorio directamente. Puedes hacer Fork a este repo y trabajar en tu propia copia.
-
 ## Por aprender
 
 - Java
