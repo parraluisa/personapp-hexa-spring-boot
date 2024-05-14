@@ -83,6 +83,7 @@ public class EstudioInputAdapterRest {
         }
     }
 
+    // View All
     public List<EstudioResponse> historial(String database){
         log.info("Into historial EstudioEntity in Input Adapter");
 
@@ -102,16 +103,14 @@ public class EstudioInputAdapterRest {
         }
     }
 
+    // Create
     public EstudioResponse crearEstudio(EstudioRequest request)
     {
         try{
             setStudyOutputPortInjection(request.getDatabase());
-            //Get person by id
             Person person = personInputPort.findOne(Integer.parseInt(request.getIdPerson()));
-            //Get profession by id
             Profession profession = professionInputPort.findOne(Integer.parseInt(request.getIdProfession()));
 
-            //Create study
             Study study = studyInputPort.create(estudioMapperRest.fromAdapterToDomain(request, profession, person));
             System.out.println(study);
             return estudioMapperRest.fromDomainToAdapterRestMaria(study);

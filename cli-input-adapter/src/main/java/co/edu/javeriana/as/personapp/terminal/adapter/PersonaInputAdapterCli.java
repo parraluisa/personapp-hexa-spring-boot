@@ -94,10 +94,10 @@ public class PersonaInputAdapterCli {
 		}
 	}
 
-	public void buscarPersona(String database, int cc) {
+	public void buscarPersona(String dbOption, int cc) {
 		log.info("Into buscar PersonaEntity in Input Adapter");
 		try {
-			setPersonOutputPortInjection(database);
+			setPersonOutputPortInjection(dbOption);
 			Person person = personInputPort.findOne(cc);
 			PersonaModelCli persona = personaMapperCli.fromDomainToAdapterCli(person);
 			System.out.println("Persona encontrada: " + persona.toString());
