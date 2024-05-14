@@ -18,7 +18,7 @@ public class EstudioControllerV1 {
     @Autowired
     private EstudioInputAdapterRest estudioInputAdapterRest;
 
-    //Get ALL ESTUDIOS
+    
     @ResponseBody
     @GetMapping(path = "/{database}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<EstudioResponse> estudios(@PathVariable String database) {
@@ -26,7 +26,7 @@ public class EstudioControllerV1 {
         return estudioInputAdapterRest.historial(database.toUpperCase());
     }
 
-    //POST NEW ESTUDIO
+    
     @ResponseBody
     @PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public EstudioResponse crearEstudio(@RequestBody EstudioRequest request) {

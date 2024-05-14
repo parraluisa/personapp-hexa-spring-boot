@@ -29,4 +29,5 @@ public interface PersonInputPort {
 	public List<Phone> getPhones(Integer identification) throws NoExistException;
 
 	public List<Study> getStudies(Integer identification) throws NoExistException;
+	
 }
