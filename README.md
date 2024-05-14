@@ -1,6 +1,7 @@
 # PersonApp Hexa Spring Boot
+## Sistema de Gestión de Personas
 
-Esta es una plantilla para el Laboratorio de Arquitectura Limpia en Spring Boot.
+Este proyecto es un sistema de gestión de personas que te permite administrar información sobre personas, teléfonos, profesiones y estudios.
 
 ## Integrantes
 
@@ -43,10 +44,57 @@ Por favor, no editar este repositorio directamente. Puedes hacer Fork a este rep
 
 ## Ejecución
 
-1. Iniciar la aplicación Spring Boot.
-2. Acceder a Swagger en [http://localhost:3000/swagger-ui.html](http://localhost:3000/swagger-ui.html).
+### CLI
 
-## Endpoints
+Para ejecutar la aplicación en modo CLI, sigue estos pasos:
+
+1. Asegúrate de tener Java instalado en tu sistema.
+2. Ejecuta el archivo `PersonaAppCli.java` para ingresar al menú.
+3. Sigue las instrucciones en pantalla para interactuar con la aplicación.
+
+### Swagger
+
+Para ejecutar la API en Swagger, sigue estos pasos:
+
+1. Asegúrate de tener Java instalado en tu sistema.
+2. Ejecuta el archivo `PersonaAppRestApi.java` para iniciar la API.
+3. Abre un navegador web y navega a `http://localhost:PUERTO/swagger-ui.html` (reemplaza `PUERTO` con el puerto en el que se está ejecutando la API) para acceder a la documentación de la API en Swagger.
+
+## Opciones del Menú CLI
+
+### Persona
+
+- **Ver todas las personas:** Muestra una lista de todas las personas registradas en el sistema.
+- **Crear una persona:** Permite crear un nuevo registro de persona, ingresando su nombre, apellido, género y edad.
+- **Actualizar una persona:** Permite actualizar la información de una persona existente, buscándola por su identificación.
+- **Buscar una persona:** Busca una persona por su identificación y muestra su información.
+- **Eliminar una persona:** Elimina una persona del sistema, buscándola por su identificación.
+
+### Teléfono
+
+- **Ver todos los teléfonos:** Muestra una lista de todos los teléfonos registrados en el sistema.
+- **Crear un teléfono:** Permite crear un nuevo registro de teléfono, ingresando el número, la compañía y el id de la persona a la que pertenece.
+- **Actualizar un teléfono:** Permite actualizar la información de un teléfono existente, buscándolo por su número.
+- **Buscar un teléfono:** Busca un teléfono por su número y muestra su información.
+- **Eliminar un teléfono:** Elimina un teléfono del sistema, buscándolo por su número.
+
+### Profesión
+
+- **Ver todas las profesiones:** Muestra una lista de todas las profesiones registradas en el sistema.
+- **Crear una profesión:** Permite crear un nuevo registro de profesión, ingresando su nombre y descripción.
+- **Actualizar una profesión:** Permite actualizar la información de una profesión existente, buscándola por su identificación.
+- **Buscar una profesión:** Busca una profesión por su identificación y muestra su información.
+- **Eliminar una profesión:** Elimina una profesión del sistema, buscándola por su identificación.
+
+### Estudio
+
+- **Ver todos los estudios:** Muestra una lista de todos los estudios registrados en el sistema.
+- **Crear un estudio:** Permite crear un nuevo registro de estudio, ingresando su nombre y nivel.
+- **Actualizar un estudio:** Permite actualizar la información de un estudio existente, buscándolo por su identificación.
+- **Buscar un estudio:** Busca un estudio por su identificación y muestra su información.
+- **Eliminar un estudio:** Elimina un estudio del sistema, buscándolo por su identificación.
+
+## Endpoints Swagger
 
 ### Estudios
 
@@ -77,9 +125,4 @@ Por favor, no editar este repositorio directamente. Puedes hacer Fork a este rep
 - **GET /api/v1/telefono/{database}/{id}**: Busca un teléfono por su ID.
 - **DELETE /api/v1/telefono/{database}/{id}**: Elimina un teléfono por su ID.
 
----
-
-Claro, puedo ayudarte a mejorar tu README. Aquí te dejo una versión más organizada y detallada:
-
----
 
