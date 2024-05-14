@@ -128,9 +128,4 @@ public class PersonaInputAdapterRest {
 		}
 	}
 
-	// Count
-
-	// Get Phones
-
-	// Get Studies
 }
